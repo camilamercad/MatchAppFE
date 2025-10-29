@@ -1,0 +1,32 @@
+<mat-toolbar>
+    <button matIconButton (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+    </button>
+</mat-toolbar>
+    
+<mat-sidenav-container class="contenedor">
+    <mat-sidenav #sidenav mode="side" class="side">
+        <form [formGroup]="form">
+            <mat-form-field appearance="fill" class="filtro">
+                <mat-label>Título</mat-label>
+                <input matInput formControlName="titulo" placeholder="Titulo"/>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="filtro">
+                <mat-label>Descripción</mat-label>
+                <input matInput formControlName="descripcion" placeholder="Descripcion"/>
+            </mat-form-field>
+
+            <button mat-button type="button" (click)="onSearchClick()">Buscar</button>
+        </form>
+    </mat-sidenav>
+    
+    <mat-sidenav-content class="principal">
+        <div>
+            @for(project of projects; track $index) {
+                <p>{{project.Titulo}}</p>
+                <p>{{project.Descripcion}}</p>
+            }
+        </div>
+    </mat-sidenav-content>
+</mat-sidenav-container>

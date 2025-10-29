@@ -1,0 +1,26 @@
+.landing-page{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    width: 100%;
+    gap: 2rem;
+}
+
+.logo-container{
+    width: 35%;
+    height: 35%;
+}
+
+.logo{
+    max-width: 100%;
+    height: auto;
+}
+
+.texto{
+    font-size: 2rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+    line-height: 1.5;
+}
