@@ -1,0 +1,18 @@
+.side{
+    background-color: #f0869bdc;
+    display: flex;
+    padding: 1rem;
+    width: 20%;
+}
+
+.principal{
+    padding: 1rem;
+}
+
+.filtro{
+    width: 100%;
+}
+
+.contenedor{
+    height: 100%;
+}
