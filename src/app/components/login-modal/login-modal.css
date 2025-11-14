@@ -1,0 +1,33 @@
+.dialog {
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.actions-row {
+  margin-top: 8px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+}
+
+.switch-mode-text {
+  margin-top: 12px;
+  text-align: center;
+  font-size: 14px;
+}
+
+.switch-mode-text span {
+  cursor: pointer;
+  text-decoration: underline;
+}

@@ -1,0 +1,75 @@
+<div class="dialog">
+    <h1 mat-dialog-title>
+    {{ isRegisterMode ? 'Crear usuario' : 'Iniciar sesión' }}
+    </h1>
+
+    <div mat-dialog-content>
+
+        @if(!isRegisterMode){
+        <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form-container">
+            <mat-form-field appearance="fill" class="full-width">
+                <mat-label>Nombre de usuario</mat-label>
+                <input matInput formControlName="username"/>
+            </mat-form-field>
+
+            <div class="actions-row">
+                <button mat-raised-button color="primary" type="submit" [disabled]="loginForm.invalid">
+                    Ingresar
+                </button>
+            </div>
+
+            <div class="switch-mode-text">
+                ¿No tenés usuario?
+                <span (click)="switchToRegister()">Crear usuario</span>
+            </div>
+        </form>
+        }
+        @else {
+            <form [formGroup]="registerForm" (ngSubmit)="onRegister()" class="form-container">
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Nombre</mat-label>
+                    <input matInput formControlName="nombre" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Mail</mat-label>
+                    <input matInput formControlName="mail" type="email" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Fecha de nacimiento</mat-label>
+                    <input matInput formControlName="fechaNacimiento" type="date" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Descripción</mat-label>
+                    <textarea matInput formControlName="descripcion"></textarea>
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Teléfono</mat-label>
+                    <input matInput formControlName="telefono" />
+                </mat-form-field>
+
+                <mat-form-field appearance="fill" class="full-width">
+                    <mat-label>Género</mat-label>
+                    <mat-select formControlName="genero">
+                        @for (gender of genders; track gender) {
+                            <mat-option [value]="gender.value">{{gender.name}}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="actions-row">
+                    <button mat-button type="button" (click)="switchToLogin()">
+                        Volver atrás
+                    </button>
+
+                    <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">
+                        Registrar usuario
+                    </button>
+                </div>
+            </form>
+        }
+    </div>
+</div>
