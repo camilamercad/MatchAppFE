@@ -17,15 +17,32 @@
                 <input matInput formControlName="descripcion" placeholder="Descripcion"/>
             </mat-form-field>
 
+            <mat-form-field appearance="fill" class="filtro">
+                <mat-label>Categoría</mat-label>
+                <mat-select>
+                    @for (categoria of categorias; track categoria) {
+                        <mat-option [value]="categoria.Id" formControlName="idCategoria">{{categoria.Nombre}}</mat-option>
+                    }
+                </mat-select>
+            </mat-form-field>
+
+            <mat-form-field appearance="fill" class="filtro">
+                <mat-label>Usuario</mat-label>
+                <input matInput formControlName="usuario" placeholder="Usuario"/>
+            </mat-form-field>
+
+            <mat-slide-toggle formControlName="fecha" appearance="fill" class="filtro">Ordenar por fecha</mat-slide-toggle>
+
             <button mat-button type="button" (click)="onSearchClick()">Buscar</button>
         </form>
     </mat-sidenav>
     
     <mat-sidenav-content class="principal">
-        <div>
-            @for(project of projects; track $index) {
-                <p>{{project.Titulo}}</p>
-                <p>{{project.Descripcion}}</p>
+        <div class="projects-list">
+            @if(mostrarProyectos()){
+                @for(project of projects; track $index) {
+                    <app-project-card [project]="project" [buscando]="buscando()"></app-project-card>
+                }
             }
         </div>
     </mat-sidenav-content>
