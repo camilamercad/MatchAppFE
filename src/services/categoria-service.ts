@@ -9,6 +9,6 @@ export class CategoriaService {
   private _http = inject(HttpClient);
 
   getAll() : Observable<{ Id: number; Nombre: string; }[]> {
-    return this._http.get<{ Id: number; Nombre: string; }[]>('http://localhost:3000/api/Categoria');
+    return this._http.get<{ Id: number; Nombre: string; }[]>('http://localhost:3000/api/Categorias');
   }
 }

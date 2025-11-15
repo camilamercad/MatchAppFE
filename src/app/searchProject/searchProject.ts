@@ -29,6 +29,7 @@ export class searchProject {
   projects!: ProyectoListItemDto[]
   categorias!: { Id: number; Nombre: string; }[];
   buscando = signal<boolean>(false);
+  mostrarProyectos = signal<boolean>(false);
 
   constructor(private _projectService: ProjectService, private _categoriaService: CategoriaService) {}
 
@@ -46,6 +47,7 @@ export class searchProject {
       next: (res: ProyectoListItemDto[]) => {
         this.projects = res;
         this.buscando.set(false);
+        this.mostrarProyectos.set(true);
       },
       error: () => {
 
@@ -55,18 +57,18 @@ export class searchProject {
     this._categoriaService.getAll().subscribe({
       next: (res: { Id: number; Nombre: string; }[]) => {
         this.categorias = res;
+        console.log(res)
       },
       error: () => {}
     });
   }
 
-  onSearchClick(){
-    console.log(this.form.value.titulo)
-    console.log(this.form.value.descripcion)
-
+  onSearchClick(){  
+    this.buscando.set(true)
     this._projectService.getAll(this.form.value.titulo, this.form.value.descripcion).subscribe({
       next: (res: ProyectoListItemDto[]) => {
         this.projects = res;
+        this.buscando.set(false)
       },
       error: () => {
 
