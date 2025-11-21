@@ -33,6 +33,7 @@ export class searchProject {
   userPhotoUrl = './assets/profile-picture.png';
   searchBarText: string = '';
 
+
   constructor(private _projectService: ProjectService, private _categoriaService: CategoriaService, private _router: Router) {}
 
   form: FormGroup = new FormGroup({
@@ -49,6 +50,7 @@ export class searchProject {
       next: (res: ProyectoListItemDto[]) => {
         this.projects = res;
         this.buscando.set(false);
+        this.mostrarProyectos.set(true);
       },
       error: () => {
 
@@ -58,6 +60,7 @@ export class searchProject {
     this._categoriaService.getAll().subscribe({
       next: (res: Categoria[]) => {
         this.categorias = res;
+        console.log(res)
       },
       error: () => {}
     });
@@ -85,6 +88,7 @@ export class searchProject {
     this._projectService.getAll(this.searchBarText).subscribe({
       next: (res: ProyectoListItemDto[]) => {
         this.projects = res;
+        this.buscando.set(false)
       },
       error: () => {
 

@@ -60,8 +60,10 @@
     
     <mat-sidenav-content class="principal">
         <div class="projects-list">
-            @for(project of projects; track $index) {
-                <app-project-card [project]="project" [buscando]="buscando()"></app-project-card>
+            @if(mostrarProyectos()){
+                @for(project of projects; track $index) {
+                    <app-project-card [project]="project" [buscando]="buscando()"></app-project-card>
+                }
             }
         </div>
     </mat-sidenav-content>
