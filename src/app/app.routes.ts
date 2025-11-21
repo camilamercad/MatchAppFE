@@ -4,5 +4,6 @@ import { Home } from './home/home';
 
 export const routes: Routes = [
     {path: '', component: Home, pathMatch: 'full' },
-    {'path': 'project', component: searchProject}
+    {'path': 'project', component: searchProject},
+    
 ];
