@@ -10,11 +10,11 @@ import { ProyectoListItemDto } from '../interfaces/proyecto-item-dto';
 export class ProjectService {
   private _http = inject(HttpClient);
 
-  getAll(titulo?: string, descripcion?: string, idUsuario?: number, idCategoria?: string, ordenarPorFecha?: string) : Observable<ProyectoListItemDto[]> {
+  getAll(titulo?: string, descripcion?: string, usuario?: string, idCategoria?: string, ordenarPorFecha?: string) : Observable<ProyectoListItemDto[]> {
     let params = new HttpParams();
     if (titulo) params = params.set('Titulo', titulo);
     if (descripcion) params = params.set('Descripcion', descripcion);
-    if (idUsuario) params = params.set('IdUsuario', idUsuario.toString());
+    if (usuario) params = params.set('NombreUsuario', usuario);
     if (idCategoria) params = params.set('IdCategoria', idCategoria);
     if (ordenarPorFecha) params = params.set('OrdenarPorFecha', ordenarPorFecha);
 
