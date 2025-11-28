@@ -16,4 +16,8 @@ export class UsuarioService {
     Add(user: User) : Observable<void>{
         return this._http.post<void>('http://localhost:3000/api/Usuarios/', user);
     }
+
+    GetById(id: number) : Observable<User>{
+        return this._http.get<User>(`http://localhost:3000/api/Usuarios/${id}`);
+    }
 }

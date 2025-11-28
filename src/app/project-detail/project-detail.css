@@ -1,0 +1,86 @@
+:host { display: block; }
+
+/* Página a dos columnas (imagen | contenido) */
+.page {
+  min-height: 100dvh;
+  padding: clamp(16px, 4vw, 32px);
+  box-sizing: border-box;
+
+  display: grid;
+  grid-template-columns: minmax(260px, 420px) 1fr;
+  gap: clamp(16px, 3vw, 32px);
+  align-items: start;
+}
+
+/* Imagen */
+.media img {
+  width: 100%;
+  aspect-ratio: 4/3;
+  object-fit: cover;
+  border-radius: 16px;
+  display: block;
+}
+
+/* Títulos y textos */
+.title h1 {
+  margin: 0 0 8px 0;
+  font-size: clamp(28px, 3.2vw, 40px);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+.subtitle {
+  margin: 0;
+  opacity: .8;
+  font-size: clamp(14px, 1.6vw, 16px);
+}
+
+.detail p { margin: 16px 0 0; font-size: clamp(15px, 1.7vw, 18px); }
+
+/* Meta */
+.meta {
+  margin-top: clamp(20px, 3vw, 32px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+.meta-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 32px;
+  font-size: 14px;
+  opacity: .9;
+
+  svg { width: 20px; height: 20px; fill: currentColor; opacity: .75; }
+}
+
+/* Skeletons con shimmer */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: rgba(0,0,0,.08);
+  border-radius: 12px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    transform: translateX(-100%);
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.5), transparent);
+    animation: shimmer 1.2s infinite;
+  }
+}
+@keyframes shimmer { 100% { transform: translateX(100%); } }
+
+.skeleton-img      { width: 100%; aspect-ratio: 4/3; }
+.skeleton-title    { height: 40px; width: 60%; border-radius: 8px; margin-bottom: 6px; }
+.skeleton-subtitle { height: 18px; width: 40%; border-radius: 6px; }
+.skeleton-line     { height: 14px; margin-top: 10px; border-radius: 6px; }
+.skeleton-line.short { width: 70%; }
+.skeleton-chip     { display: inline-block; height: 20px; width: 140px; border-radius: 999px; }
+
+/* Responsive: stack en pantallas chicas */
+@media (max-width: 960px) {
+  .page { grid-template-columns: 1fr; }
+  .meta { grid-template-columns: 1fr; }
+}
