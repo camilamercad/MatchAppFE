@@ -1,0 +1,104 @@
+<div class="base">
+  <mat-card class="card">
+    <div class="page" [attr.aria-busy]="loading">
+      <aside class="media">
+        @if (!loading) {
+          <img
+            [src]="project.image ?? './assets/placeholder.png'"
+            alt="Imagen del proyecto" />
+        } @else {
+          <div class="skeleton skeleton-img" role="status" aria-label="Cargando imagen"></div>
+        }
+      </aside>
+
+      <main class="content" role="main">
+        <header class="title">
+          @if (!loading) {
+            <h1>{{ project.title }}</h1>
+            @if (project.description) {
+              <p class="subtitle">{{ project.description }}</p>
+            }
+          } @else {
+            <div class="skeleton skeleton-title"></div>
+            <div class="skeleton skeleton-subtitle"></div>
+          }
+        </header>
+
+        <section class="detail">
+          @if (!loading) {
+            <p>
+              {{ project.detailedDescription || 'Sin descripción detallada.' }}
+            </p>
+          } @else {
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line"></div>
+            <div class="skeleton skeleton-line short"></div>
+          }
+        </section>
+
+        <footer class="meta">
+          <div class="meta-item">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M19 4h-1V2h-2v2H8V2H6v2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 16H5V9h14v11zM7 11h5v5H7z"/>
+          </svg>
+            @if (!loading) {
+              <span>
+                {{ project.creationDate ? ((project.creationDate) | date:'longDate') : 'Fecha desconocida' }}
+              </span>
+            } @else {
+              <span class="skeleton skeleton-chip"></span>
+            }
+          </div>
+
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h8l2 3h8v11H3z"/></svg>
+            @if (!loading) {
+              <span>
+                {{ category }}
+              </span>
+            } @else {
+              <span class="skeleton skeleton-chip"></span>
+            }
+          </div>
+
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm-7 8a7 7 0 0 1 14 0z"/></svg>
+            @if (!loading) {
+              <span>
+                {{ user.name }}
+              </span>
+            } @else {
+              <span class="skeleton skeleton-chip"></span>
+            }
+          </div>
+
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.05-.24 11.36 11.36 0 0 1 3.56.95 1 1 0 0 1 .62.94v3.49a1 1 0 0 1-1 1A17 17 0 0 1 3 5a1 1 0 0 1 1-1h3.49a1 1 0 0 1 .94.62 11.36 11.36 0 0 1 .95 3.56 1 1 0 0 1-.24 1.05l-2.2 2.2z"/>
+            </svg>
+
+            @if (!loading) {
+              <span>{{ user.phone }}</span>
+            } @else {
+              <span class="skeleton skeleton-chip"></span>
+            }
+        </div>
+
+          <div class="meta-item">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2zm0 4-8 5-8-5V6l8 5 8-5z"/>
+            </svg>
+
+
+            @if (!loading) {
+              <span>{{ user.email }}</span>
+            } @else {
+              <span class="skeleton skeleton-chip"></span>
+            }
+        </div>
+        </footer>
+      </main>
+    </div>
+  </mat-card>
+</div>

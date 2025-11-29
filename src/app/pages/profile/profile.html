@@ -1,0 +1,124 @@
+
+@if(!isLoading && user){
+    <section class="profile-page">
+        <mat-card class="profile-card">
+            <mat-card-header>
+                <div class="header">
+                    <div class="header-left">
+                        <div mat-card-avatar class="avatar">
+                            @if(user?.name){
+                                <span>
+                                    {{ user!.name[0] | uppercase }}
+                                </span>
+                            }
+                        </div>
+                        <div class="header-info">
+                            <mat-card-title>{{ user?.name }}</mat-card-title>
+                            <mat-card-subtitle>{{ user?.email }}</mat-card-subtitle>
+                        </div>
+                    </div>
+                    <div class="header-right">
+                        <button mat-icon-button aria-label="Editar perfil" (click)="openEditProfileModal()">
+                            <mat-icon>edit</mat-icon>
+                        </button>
+                    </div>
+                </div>
+            </mat-card-header>
+
+            <mat-divider></mat-divider>
+
+            <mat-card-content>
+                <div class="profile-grid">
+                    <div class="profile-item">
+                        <mat-icon class="item-icon">cake</mat-icon>
+                        <div class="item-content">
+                            <span class="item-label">Fecha de nacimiento</span>
+                            <span class="item-value">
+                                {{ user?.dateBirth ? (user?.dateBirth | date:'longDate') : '-' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="profile-item">
+                        <mat-icon class="item-icon">phone</mat-icon>
+                        <div class="item-content">
+                            <span class="item-label">Teléfono</span>
+                            <span class="item-value">
+                            {{ user?.phone || '-' }}
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="profile-item">
+                        <mat-icon class="item-icon">person</mat-icon>
+                        <div class="item-content">
+                            <span class="item-label">Género</span>
+                            <span class="item-value">
+                                @if(user?.gender !== undefined && user?.gender !== null){
+                                    <ng-container>
+                                        {{ user?.gender ? 'Masculino' : 'Femenino' }}
+                                    </ng-container>
+                                }
+                                @else{
+                                    -
+                                }
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="profile-description">
+                    <h3>Descripción</h3>
+                    @if(user?.description && user?.description?.trim() !== ''){
+                        <p>
+                            {{ user?.description }}
+                        </p>
+                    }
+                    @else{
+                        <p class="empty-text">Este usuario aún no tiene descripción.</p>
+                    }
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </section>
+}
+@else{
+    <ng-template #loadingState>
+        <section class="profile-page">
+            <mat-card class="profile-card">
+
+                <mat-card-header>
+                    <div mat-card-avatar class="avatar skeleton skeleton-circle"></div>
+                    <div class="header-skeleton">
+                        <div class="skeleton skeleton-text skeleton-title"></div>
+                        <div class="skeleton skeleton-text skeleton-subtitle"></div>
+                    </div>
+                </mat-card-header>
+
+                <mat-divider></mat-divider>
+
+                <mat-card-content>
+                    <div class="profile-grid">
+                        @for(item of [1,2,3,4]; track item) {
+                            <div class="profile-item">
+                                <div class="item-icon skeleton skeleton-circle"></div>
+                                <div class="item-content">
+                                    <div class="skeleton skeleton-text skeleton-label"></div>
+                                    <div class="skeleton skeleton-text skeleton-value"></div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+
+                    <div class="profile-description">
+                        <div class="skeleton skeleton-text skeleton-title"></div>
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text"></div>
+                        <div class="skeleton skeleton-text skeleton-short"></div>
+                    </div>
+                </mat-card-content>
+
+            </mat-card>
+        </section>
+    </ng-template>
+}

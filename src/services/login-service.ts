@@ -21,13 +21,18 @@ export class LoginService {
     }
   }
 
-  login(usuario: GetUserByNameResponse) {
-    this.currentUser.set(usuario.usuario);
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(usuario.usuario));
+  login(user: GetUserByNameResponse) {
+    this.currentUser.set(user.user);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(user.user));
   }
 
   logout() {
     this.currentUser.set(null);
     localStorage.removeItem(STORAGE_KEY);
+  }
+
+  setCurrentUser(user: User) {
+    this.currentUser.set(user);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
   }
 }

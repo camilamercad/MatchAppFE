@@ -1,9 +1,9 @@
 export interface Project {
-    Titulo: string,
-    Descripcion: string,
-    IdUsuario?: number,
-    DescripcionDetallada?: string,
-    FechaCreacion?: Date,
-    IdCategoria?: number,
-    Imagen?: string
+    title: string,
+    description: string,
+    idUser?: number,
+    detailedDescription?: string,
+    creationDate?: Date,
+    idCategory?: number,
+    image?: string
 }

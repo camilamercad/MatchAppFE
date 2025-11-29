@@ -1,0 +1,9 @@
+mat-dialog-content {
+  min-width: 280px;
+}
+
+.warning-text {
+  margin-top: 8px;
+  font-size: 13px;
+  opacity: 0.8;
+}

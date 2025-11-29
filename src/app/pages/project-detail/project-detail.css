@@ -1,8 +1,12 @@
 :host { display: block; }
 
-/* Página a dos columnas (imagen | contenido) */
+.card{
+  margin: 1rem;
+  height: fit-content;
+  width: fit-content;
+}
+
 .page {
-  min-height: 100dvh;
   padding: clamp(16px, 4vw, 32px);
   box-sizing: border-box;
 
@@ -12,7 +16,6 @@
   align-items: start;
 }
 
-/* Imagen */
 .media img {
   width: 100%;
   aspect-ratio: 4/3;
@@ -21,7 +24,6 @@
   display: block;
 }
 
-/* Títulos y textos */
 .title h1 {
   margin: 0 0 8px 0;
   font-size: clamp(28px, 3.2vw, 40px);
@@ -36,7 +38,6 @@
 
 .detail p { margin: 16px 0 0; font-size: clamp(15px, 1.7vw, 18px); }
 
-/* Meta */
 .meta {
   margin-top: clamp(20px, 3vw, 32px);
   display: grid;
@@ -54,7 +55,6 @@
   svg { width: 20px; height: 20px; fill: currentColor; opacity: .75; }
 }
 
-/* Skeletons con shimmer */
 .skeleton {
   position: relative;
   overflow: hidden;
@@ -79,7 +79,6 @@
 .skeleton-line.short { width: 70%; }
 .skeleton-chip     { display: inline-block; height: 20px; width: 140px; border-radius: 999px; }
 
-/* Responsive: stack en pantallas chicas */
 @media (max-width: 960px) {
   .page { grid-template-columns: 1fr; }
   .meta { grid-template-columns: 1fr; }

@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { UsuarioService } from '../../../services/usuario-service';
+import { UserService } from '../../../services/user-service';
 import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -26,18 +26,18 @@ export class LoginModal {
   registerForm: FormGroup;
 
 
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<LoginModal>, private _usuarioService: UsuarioService, private _router: Router, private crd: ChangeDetectorRef, private _loginService: LoginService) {
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<LoginModal>, private _usuarioService: UserService, private _router: Router, private crd: ChangeDetectorRef, private _loginService: LoginService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required]
     });
 
     this.registerForm = this.fb.group({
-      nombre: new FormControl<string>('', Validators.required),
-      mail: new FormControl<string>('', Validators.required),
-      fechaNacimiento: new FormControl<string>('', Validators.required),
-      descripcion: new FormControl<string | undefined>(undefined),
-      telefono: new FormControl<number | undefined>(undefined),
-      genero: new FormControl<boolean | undefined>(undefined)
+      name: new FormControl<string>('', Validators.required),
+      email: new FormControl<string>('', Validators.required),
+      dateBirth: new FormControl<string>('', Validators.required),
+      description: new FormControl<string | undefined>(undefined),
+      phone: new FormControl<number | undefined>(undefined),
+      gender: new FormControl<boolean | undefined>(undefined)
     });
   }
 
@@ -60,14 +60,16 @@ export class LoginModal {
     const username = this.loginForm.value.username;
 
     this._usuarioService.GetByName(username).subscribe({
-      next: (usuario: GetUserByNameResponse) => {
-        if (usuario) {
+      next: (user: GetUserByNameResponse) => {
+        if (user) {
           this._router.navigate(['/project']);
           this.dialogRef.close({ mode: 'login', username });
-          this._loginService.login(usuario);
+          this._loginService.login(user);
         }
       },
-      error: () => {
+      error: (err) => {
+        if(err.status === 404)
+        alert('Usuario no encontrado');
       }
     });
   }
@@ -76,12 +78,12 @@ export class LoginModal {
     if (this.registerForm.invalid) return;
     
     const data : User = {
-      Nombre: this.registerForm.value.nombre,
-      Email: this.registerForm.value.mail,
-      FechaDeNacimiento: new Date(this.registerForm.value.fechaNacimiento).toISOString(),
-      Descripcion: this.registerForm.value.descripcion,
-      Telefono: this.registerForm.value.telefono,
-      Genero: this.registerForm.value.genero
+      name: this.registerForm.value.name,
+      email: this.registerForm.value.email,
+      dateBirth: new Date(this.registerForm.value.dateBirth).toISOString(),
+      description: this.registerForm.value.description,
+      phone: this.registerForm.value.phone,
+      gender: this.registerForm.value.gender
     };
 
     this._usuarioService.Add(data).subscribe({
