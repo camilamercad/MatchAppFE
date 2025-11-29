@@ -1,0 +1,73 @@
+<div class="page" [attr.aria-busy]="buscando">
+  <aside class="media">
+    @if (!buscando) {
+      <img
+        [src]="project.Imagen"
+        alt="Imagen del proyecto" />
+    } @else {
+      <div class="skeleton skeleton-img" role="status" aria-label="Cargando imagen"></div>
+    }
+  </aside>
+
+  <main class="content" role="main">
+    <header class="title">
+      @if (!buscando) {
+        <h1>{{ project.Titulo }}</h1>
+        @if (project.Descripcion) {
+          <p class="subtitle">{{ project.Descripcion }}</p>
+        }
+      } @else {
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-subtitle"></div>
+      }
+    </header>
+
+    <section class="detail">
+      @if (!buscando) {
+        <p>
+          {{ project.DescripcionDetallada || 'Sin descripción detallada.' }}
+        </p>
+      } @else {
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line short"></div>
+      }
+    </section>
+
+    <footer class="meta">
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 2h2v2h6V2h2v2h3v18H4V4h3V2zm13 8H6v10h14V10zM6 8h14V6H6v2z"/></svg>
+        @if (!buscando) {
+          <span>
+            {{ project.FechaCreacion ? (project.FechaCreacion) : 'Fecha desconocida' }}
+          </span>
+        } @else {
+          <span class="skeleton skeleton-chip"></span>
+        }
+      </div>
+
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h8l2 3h8v11H3z"/></svg>
+        @if (!buscando) {
+          <span>
+            {{ categoria }}
+          </span>
+        } @else {
+          <span class="skeleton skeleton-chip"></span>
+        }
+      </div>
+
+      <div class="meta-item">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 12a5 5 0 1 0-5-5 5 5 0 0 0 5 5zm-7 8a7 7 0 0 1 14 0z"/></svg>
+        @if (!buscando) {
+          <span>
+            {{ usuario }}
+          </span>
+        } @else {
+          <span class="skeleton skeleton-chip"></span>
+        }
+      </div>
+    </footer>
+  </main>
+</div>

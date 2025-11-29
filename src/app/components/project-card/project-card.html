@@ -9,31 +9,42 @@
       </div>
     <div class="content">
       <div class="text">
-        <div class="title">
-          @if (!buscando()) {
-            <h3 class="mat-title-medium">{{ project()?.Titulo }}</h3>
-          } @else {
-            <div class="skeleton skeleton-title" role="status" aria-label="Cargando título"></div>
-          }
+        <div class="top-text">
+          <div class="title">
+            @if (!buscando()) {
+              <h3 class="mat-title-medium">{{ project()?.Titulo }}</h3>
+            } @else {
+              <div class="skeleton skeleton-title" role="status" aria-label="Cargando título"></div>
+            }
+          </div>
+
+          <div class="description">
+            @if (!buscando()) {
+              <p class="mat-body-medium">{{ project()?.Descripcion }}</p>
+            } @else {
+              <div class="skeleton skeleton-line"></div>
+              <div class="skeleton skeleton-line"></div>
+              <div class="skeleton skeleton-line short"></div>
+            }
+          </div>
         </div>
 
-        <div class="description">
-          @if (!buscando()) {
-            <p class="mat-body-medium">{{ project()?.Descripcion }}</p>
-          } @else {
-            <div class="skeleton skeleton-line"></div>
-            <div class="skeleton skeleton-line"></div>
-            <div class="skeleton skeleton-line short"></div>
-          }
-        </div>
-      </div>
-      <div class="bottom">
         <div class="bottom-text">
           <div class="bottom-item"><h3 class="mat-title-medium">Usuario: </h3>{{project()?.NombreUsuario}}</div>
           <div class="bottom-item"><h3 class="mat-title-medium">Categoria: </h3>{{ project()?.Categoria }}</div>
         </div>
-        <div>
-          <button mat-fab aria-label="Ver más" [routerLink]="ruta()"[disabled]="buscando()">
+      </div>
+      <div class="bottom">
+        @if(sameUser()) {
+          <button mat-mini-fab aria-label="Modificar proyecto" (click)="update()" [disabled]="buscando()">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab aria-label="Eliminar proyecto" (click)="delete(project()?.Id!)" [disabled]="buscando()">
+            <mat-icon>delete</mat-icon>
+          </button>
+        }
+        <div class="navigate">
+          <button mat-mini-fab aria-label="Ver más" (click)="navegar()" [disabled]="buscando()">
             <mat-icon>arrow_forward</mat-icon>
           </button>
         </div>

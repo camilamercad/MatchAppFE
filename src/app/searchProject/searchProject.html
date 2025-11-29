@@ -14,7 +14,10 @@
             </mat-form-field>
         </div>
         <div class="header_right">
-            <button mat-button type="button" (click)="onSearchClick()" class="add_project">
+            <button mat-button type="button" (click)="loadUserProject()" class="add_project">
+                Ver mis proyectos
+            </button>
+            <button mat-button type="button" (click)="openAddProjectModal()" class="add_project">
                 Nuevo proyecto
                 <mat-icon matSuffix>add</mat-icon>
             </button>
@@ -62,7 +65,7 @@
         <div class="projects-list">
             @if(mostrarProyectos()){
                 @for(project of projects; track $index) {
-                    <app-project-card [project]="project" [buscando]="buscando()"></app-project-card>
+                    <app-project-card [project]="project" [buscando]="buscando()" (recargar)="onProjectDelete($event)"></app-project-card>
                 }
             }
         </div>

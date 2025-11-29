@@ -5,4 +5,5 @@ export interface User {
     Descripcion?: string
     Telefono?: number
     Genero?: boolean
+    Id?: number
 }

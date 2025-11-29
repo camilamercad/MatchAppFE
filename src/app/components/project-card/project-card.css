@@ -1,13 +1,16 @@
 .card{
   display: flex;
   flex-direction: row;
+  gap: 2rem;
 }
 
 .content{
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  flex: 80 1 0;
   gap: 1rem;
   width: 100%;
+  justify-content: space-between;
 }
 
 .project-card {
@@ -26,6 +29,7 @@
   object-fit: cover;
   border-radius: 12px;
   display: block;
+  flex: 20 1 0;
 }
 
 .skeleton {
@@ -69,6 +73,12 @@
   margin-bottom: 8px; 
 }
 
+.text{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .text p{ 
   margin: 0; 
 }
@@ -76,13 +86,13 @@
 .bottom {
   display: flex;
   justify-content: space-between;
-  width: 100%;
+  flex-direction: column;
 }
 
 .bottom-text{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: left;
   align-items: center;
   gap: 1rem;
 }
@@ -93,4 +103,9 @@
   justify-content: center;
   align-items: center;
   gap: 0.5rem;
+}
+
+.navigate{
+  width: fit-content;
+  height: fit-content;
 }
