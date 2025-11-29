@@ -1,7 +1,7 @@
 import { Component, ChangeDetectorRef, input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { UsuarioService } from '../../../services/usuario-service';
+import { UserService } from '../../../services/user-service';
 import { Router } from '@angular/router';
 import { MatInputModule } from '@angular/material/input';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,35 +21,39 @@ export class UpdateUserModal {
   form: FormGroup;
   user!: User
 
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<LoginModal>, private _usuarioService: UsuarioService, private _router: Router, private crd: ChangeDetectorRef, private _loginService: LoginService) {
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<LoginModal>, private _usuarioService: UserService, private _router: Router, private crd: ChangeDetectorRef, private _loginService: LoginService) {
     this.user = this._loginService.currentUser()!;
 
     this.form = this.fb.group({
-      nombre: new FormControl<string>(this.user?.Nombre, Validators.required),
-      email: new FormControl<string>(this.user?.Email, Validators.required),
-      fechaDeNacimiento: new FormControl<string>(this.toDateInputFormat(this.user?.FechaDeNacimiento), Validators.required),
-      descripcion: new FormControl<string | null>(this.user?.Descripcion ?? null),
-      telefono: new FormControl<number | null>(this.user?.Telefono ?? null)
+      name: new FormControl<string>(this.user?.name, Validators.required),
+      email: new FormControl<string>(this.user?.email, Validators.required),
+      dateBirth: new FormControl<string>(this.toDateInputFormat(this.user?.dateBirth), Validators.required),
+      description: new FormControl<string | null>(this.user?.description ?? null),
+      phone: new FormControl<number | null>(this.user?.phone ?? null)
     });
+
+    console.log(this.user)
+    console.log(this.form.value.dateBirth);
   }
 
   update(): void {
     let request: User = {
-      Nombre: this.form.value.nombre,
-      Email: this.form.value.email,
-      FechaDeNacimiento: this.form.value.fechaDeNacimiento
+      name: this.form.value.name,
+      email: this.form.value.email,
+      dateBirth: this.form.value.dateBirth
     }
 
-    if(this.form.value.descripcion)
-      request.Descripcion = this.form.value.descripcion;
+    if(this.form.value.description)
+      request.description = this.form.value.description;
 
-    if(this.form.value.telefono)
-      request.Telefono = this.form.value.telefono;
+    if(this.form.value.phone)
+      request.phone = this.form.value.phone;
 
-    this._usuarioService.UpdateById(this.user.Id!, request).subscribe({
+      console.log(request);
+    this._usuarioService.UpdateById(this.user.id!, request).subscribe({
       next: () => {
-        request.Genero = this.user.Genero;
-        request.Id = this.user.Id;
+        request.gender = this.user.gender;
+        request.id = this.user.id;
         this._loginService.setCurrentUser(request);
 
         this.dialogRef.close(true);

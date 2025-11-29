@@ -7,7 +7,7 @@
             <span>MatchApp</span>
         </div>
         <div class="header_middle">
-            <mat-form-field appearance="outline" class="filtro" class="browser">
+            <mat-form-field appearance="outline" class="filter" class="browser">
                     <mat-label>Buscar proyecto...</mat-label>
                     <input matInput (keyup.enter)="onSearchEnter()" [(ngModel)]="searchBarText" />
                     <mat-icon matSuffix>search</mat-icon>
@@ -28,44 +28,44 @@
     </div>
 </mat-toolbar>
     
-<mat-sidenav-container class="contenedor">
+<mat-sidenav-container class="container">
     <mat-sidenav #sidenav mode="side" class="side">
         <form [formGroup]="form">
-            <mat-form-field appearance="fill" class="filtro">
+            <mat-form-field appearance="fill" class="filter">
                 <mat-label>Título</mat-label>
-                <input matInput formControlName="titulo" placeholder="Titulo"/>
+                <input matInput formControlName="title" placeholder="Titulo"/>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="filtro">
+            <mat-form-field appearance="fill" class="filter">
                 <mat-label>Descripción</mat-label>
-                <input matInput formControlName="descripcion" placeholder="Descripcion"/>
+                <input matInput formControlName="description" placeholder="Descripcion"/>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="filtro">
+            <mat-form-field appearance="fill" class="filter">
                 <mat-label>Categoría</mat-label>
-                <mat-select formControlName="idCategoria">
-                    @for (categoria of categorias; track categoria) {
-                        <mat-option [value]="categoria.id">{{categoria.nombre}}</mat-option>
+                <mat-select formControlName="idCategory">
+                    @for (category of categories; track category) {
+                        <mat-option [value]="category.id">{{category.name}}</mat-option>
                     }
                 </mat-select>
             </mat-form-field>
 
-            <mat-form-field appearance="fill" class="filtro">
+            <mat-form-field appearance="fill" class="filter">
                 <mat-label>Usuario</mat-label>
-                <input matInput formControlName="usuario" placeholder="Usuario"/>
+                <input matInput formControlName="user" placeholder="Usuario"/>
             </mat-form-field>
 
-            <mat-slide-toggle formControlName="fecha" appearance="fill" class="filtro">Ordenar por fecha</mat-slide-toggle>
+            <mat-slide-toggle formControlName="date" appearance="fill" class="filter">Ordenar por fecha</mat-slide-toggle>
 
             <button mat-button type="button" (click)="onSearchClick()">Buscar</button>
         </form>
     </mat-sidenav>
     
-    <mat-sidenav-content class="principal">
+    <mat-sidenav-content class="main">
         <div class="projects-list">
-            @if(mostrarProyectos()){
+            @if(showProjects()){
                 @for(project of projects; track $index) {
-                    <app-project-card [project]="project" [buscando]="buscando()" (recargar)="onProjectDelete($event)"></app-project-card>
+                    <app-project-card [project]="project" [loading]="loading()" (reload)="onProjectDelete($event)"></app-project-card>
                 }
             }
         </div>

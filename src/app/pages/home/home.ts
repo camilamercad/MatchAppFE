@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
-import { LoginModal } from '../components/login-modal/login-modal';
+import { LoginModal } from '../../components/login-modal/login-modal';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({

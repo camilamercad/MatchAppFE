@@ -8,7 +8,7 @@
     <form [formGroup]="form" (ngSubmit)="update()" class="form-container">
         <mat-form-field appearance="fill" class="full-width">
             <mat-label>Nombre</mat-label>
-            <input matInput formControlName="nombre"/>
+            <input matInput formControlName="name"/>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="full-width">
@@ -18,17 +18,17 @@
 
         <mat-form-field appearance="fill" class="full-width">
             <mat-label>Fecha de nacimiento</mat-label>
-            <input matInput formControlName="fechaDeNacimiento" type="date" />
+            <input matInput formControlName="dateBirth" type="date" />
         </mat-form-field>
 
         <mat-form-field appearance="fill">
             <mat-label>Descripción</mat-label>
-            <textarea matInput formControlName="descripcion" cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
+            <textarea matInput formControlName="description" cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="full-width">
             <mat-label>Teléfono</mat-label>
-            <input matInput formControlName="telefono" />
+            <input matInput formControlName="phone" />
         </mat-form-field>
 
         <div class="actions-row">

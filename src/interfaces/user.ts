@@ -1,9 +1,9 @@
 export interface User {
-    Nombre: string;
-    Email: string;
-    FechaDeNacimiento: string
-    Descripcion?: string
-    Telefono?: number
-    Genero?: boolean
-    Id?: number
+    name: string;
+    email: string;
+    dateBirth: string
+    description?: string
+    phone?: number
+    gender?: boolean
+    id?: number
 }
