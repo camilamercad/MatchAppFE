@@ -1,8 +1,8 @@
-<mat-card class="project-card" [attr.aria-busy]="buscando()">
+<mat-card class="project-card" [attr.aria-busy]="loading()">
   <div class="card">
     <div class="image">
-        @if (!buscando()) {
-          <img [src]="project()?.Imagen ?? './assets/placeholder.png'" alt="Vista previa del proyecto" />
+        @if (!loading()) {
+          <img [src]="project()?.image ?? './assets/placeholder.png'" alt="Vista previa del proyecto" />
         } @else {
           <div class="skeleton skeleton-img" role="status" aria-label="Cargando imagen"></div>
         }
@@ -11,16 +11,16 @@
       <div class="text">
         <div class="top-text">
           <div class="title">
-            @if (!buscando()) {
-              <h3 class="mat-title-medium">{{ project()?.Titulo }}</h3>
+            @if (!loading()) {
+              <h3 class="mat-title-medium">{{ project()?.title }}</h3>
             } @else {
               <div class="skeleton skeleton-title" role="status" aria-label="Cargando título"></div>
             }
           </div>
 
           <div class="description">
-            @if (!buscando()) {
-              <p class="mat-body-medium">{{ project()?.Descripcion }}</p>
+            @if (!loading()) {
+              <p class="mat-body-medium">{{ project()?.description }}</p>
             } @else {
               <div class="skeleton skeleton-line"></div>
               <div class="skeleton skeleton-line"></div>
@@ -30,21 +30,21 @@
         </div>
 
         <div class="bottom-text">
-          <div class="bottom-item"><h3 class="mat-title-medium">Usuario: </h3>{{project()?.NombreUsuario}}</div>
-          <div class="bottom-item"><h3 class="mat-title-medium">Categoria: </h3>{{ project()?.Categoria }}</div>
+          <div class="bottom-item"><h3 class="mat-title-medium">Usuario: </h3>{{project()?.username}}</div>
+          <div class="bottom-item"><h3 class="mat-title-medium">Categoria: </h3>{{ project()?.category }}</div>
         </div>
       </div>
       <div class="bottom">
         @if(sameUser()) {
-          <button mat-mini-fab aria-label="Modificar proyecto" (click)="update()" [disabled]="buscando()">
+          <button mat-mini-fab aria-label="Modificar proyecto" (click)="update()" [disabled]="loading()">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab aria-label="Eliminar proyecto" (click)="openDeleteModal()" [disabled]="buscando()">
+          <button mat-mini-fab aria-label="Eliminar proyecto" (click)="openDeleteModal()" [disabled]="loading()">
             <mat-icon>delete</mat-icon>
           </button>
         }
         <div class="navigate">
-          <button mat-mini-fab aria-label="Ver más" (click)="navegar()" [disabled]="buscando()">
+          <button mat-mini-fab aria-label="Ver más" (click)="navigate()" [disabled]="loading()">
             <mat-icon>arrow_forward</mat-icon>
           </button>
         </div>

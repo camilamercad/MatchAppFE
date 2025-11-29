@@ -1,14 +1,14 @@
 import { ChangeDetectorRef, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { UsuarioService } from '../../services/usuario-service';
-import { User } from '../../interfaces/user';
+import { UserService } from '../../../services/user-service';
+import { User } from '../../../interfaces/user';
 import { MatCardModule } from '@angular/material/card'
 import { MatButtonModule } from '@angular/material/button'
 import { MatIconModule } from '@angular/material/icon'
 import {MatDividerModule} from '@angular/material/divider';
 import { UpperCasePipe } from '@angular/common';
 import { DatePipe } from '@angular/common';
-import { UpdateUserModal } from '../components/update-user-modal/update-user-modal';
+import { UpdateUserModal } from '../../components/update-user-modal/update-user-modal';
 import { MatDialog } from '@angular/material/dialog';
 
 @Component({
@@ -22,7 +22,7 @@ export class Profile {
   user!: User
   isLoading: boolean = true;
 
-  constructor(private route: ActivatedRoute, private _userService: UsuarioService, private cdr: ChangeDetectorRef, private _dialog: MatDialog) {}
+  constructor(private route: ActivatedRoute, private _userService: UserService, private cdr: ChangeDetectorRef, private _dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.id = Number(this.route.snapshot.paramMap.get('id')!);
@@ -36,6 +36,7 @@ export class Profile {
         this.user = user;
         this.isLoading = false;
         this.cdr.detectChanges();
+        console.log(this.user.dateBirth);
       }
     });
   }
