@@ -30,4 +30,9 @@ export class LoginService {
     this.currentUser.set(null);
     localStorage.removeItem(STORAGE_KEY);
   }
+
+  setCurrentUser(user: User) {
+    this.currentUser.set(user);
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(user));
+  }
 }

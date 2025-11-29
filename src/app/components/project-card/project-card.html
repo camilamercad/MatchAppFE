@@ -2,7 +2,7 @@
   <div class="card">
     <div class="image">
         @if (!buscando()) {
-          <img [src]="imgSrc" alt="Vista previa del proyecto" />
+          <img [src]="project()?.Imagen ?? './assets/placeholder.png'" alt="Vista previa del proyecto" />
         } @else {
           <div class="skeleton skeleton-img" role="status" aria-label="Cargando imagen"></div>
         }
@@ -39,7 +39,7 @@
           <button mat-mini-fab aria-label="Modificar proyecto" (click)="update()" [disabled]="buscando()">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab aria-label="Eliminar proyecto" (click)="delete(project()?.Id!)" [disabled]="buscando()">
+          <button mat-mini-fab aria-label="Eliminar proyecto" (click)="openDeleteModal()" [disabled]="buscando()">
             <mat-icon>delete</mat-icon>
           </button>
         }

@@ -14,6 +14,7 @@ import { CategoriaService } from '../../../services/categoria-service';
 import { Categoria } from '../../../interfaces/categoria';
 import { ProjectService } from '../../../services/project-service';
 import { Project } from '../../../interfaces/project';
+
 @Component({
   selector: 'app-add-project-modal',
   imports: [MatInputModule, ReactiveFormsModule, MatButtonModule, MatSelectModule],
@@ -60,8 +61,6 @@ export class AddProjectModal {
       request.Imagen = this.form.value.imagen;
 
     if(this.project){
-      console.log(request);
-
       this._projectService.UpdateById(this.projectId!, request).subscribe({
         next: () => {
           this.dialogRef.close(true);

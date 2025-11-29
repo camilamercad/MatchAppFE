@@ -21,4 +21,8 @@ export class UsuarioService {
     GetById(id: number) : Observable<User>{
         return this._http.get<User>(`http://localhost:3000/api/Usuarios/${id}`);
     }
+
+    UpdateById(id: number, user: User) : Observable<void>{
+        return this._http.put<void>(`http://localhost:3000/api/Usuarios/${id}`, user);
+    }   
 }

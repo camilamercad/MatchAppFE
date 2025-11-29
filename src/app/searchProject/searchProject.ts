@@ -52,10 +52,6 @@ export class searchProject {
     this.buscando.set(true);
     this.user = this._loginService.currentUser()!;
 
-        console.log('aaaaaaaaaaaaaaaaaaaaaaaaa');
-
-    console.log(this.user);
-
     this._projectService.getAll(this.form.value.titulo, this.form.value.descripcion, this.form.value.usuario, this.form.value.idCategoria, this.form.value.fecha).subscribe({
       next: (res: ProyectoListItemDto[]) => {
         this.projects = res;
@@ -89,7 +85,7 @@ export class searchProject {
   }
 
   goToProfile(){
-    this._router.navigate(['/profile']);
+    this._router.navigate([`/profile/${this.user.Id}`]);
   }
 
   onSearchEnter(){

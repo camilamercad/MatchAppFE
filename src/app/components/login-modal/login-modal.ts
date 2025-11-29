@@ -67,7 +67,9 @@ export class LoginModal {
           this._loginService.login(usuario);
         }
       },
-      error: () => {
+      error: (err) => {
+        if(err.status === 404)
+        alert('Usuario no encontrado');
       }
     });
   }

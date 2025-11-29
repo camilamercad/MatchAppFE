@@ -10,6 +10,7 @@ import { LoginService } from '../../../services/login-service'
 import { User } from '../../../interfaces/user'
 import { AddProjectModal } from '../add-project-modal/add-project-modal'
 import { MatDialog } from '@angular/material/dialog'
+import { ConfirmDeleteDialog } from '../confirm-delete-dialog/confirm-delete-dialog'
 
 @Component({
   selector: 'app-project-card',
@@ -59,13 +60,24 @@ export class ProjectCard implements OnInit{
       }
     });
   }
+  
+  openDeleteModal(){
+    const dialogRef = this._dialog.open(ConfirmDeleteDialog, {
+              width: '40rem',
+              height: '13rem'
+            });
+        
+            dialogRef.afterClosed().subscribe(result => {
+              if (result) {
+                this.delete(this.project()?.Id!);
+              }
+            });
+  }
 
   readonly imgSrc = 'assets/img/template-preview.jpg'
 
   ngOnInit(): void {
-    // this.user = this._loginService.currentUser()!;
-    // console.log(this.sameUser)
-    // this.cdr.detectChanges();
+
   }
 }
 

@@ -6,11 +6,15 @@ import { UsuarioService } from '../../services/usuario-service';
 import { CategoriaService } from '../../services/categoria-service';
 import { map, filter, switchMap, tap, delay } from 'rxjs';
 import { of, forkJoin } from 'rxjs';
+import { DatePipe } from '@angular/common';
+import { User } from '../../interfaces/user';
+import { LoginService } from '../../services/login-service';
+import { MatCardModule } from '@angular/material/card'
 
 @Component({
   selector: 'app-project-detail',
   standalone: true,
-  imports: [],
+  imports: [DatePipe, MatCardModule ],
   templateUrl: './project-detail.html',
   styleUrl: './project-detail.css',
 })
@@ -18,12 +22,12 @@ export class ProjectDetail implements OnInit {
   project!: Project;
   id: number | undefined = undefined;
   buscando = true;
-  usuario = '';
+  user!: User
   categoria = '';
 
   private route = inject(ActivatedRoute);
 
-  constructor(private _projectService: ProjectService, private _usuariosService: UsuarioService, private _categoriaService: CategoriaService, private crf: ChangeDetectorRef) {}
+  constructor(private _projectService: ProjectService, private _usuariosService: UsuarioService, private _categoriaService: CategoriaService, private _loginService: LoginService, private crf: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.route.paramMap.pipe(
@@ -49,7 +53,7 @@ export class ProjectDetail implements OnInit {
     .subscribe({
       next: ({ project, usuario, categoria }) => {
         this.project = project;
-        this.usuario = usuario?.Nombre ?? '';
+        this.user = usuario!;
         this.categoria = categoria?.nombre ?? '';
         this.buscando = false;
         this.crf.detectChanges();
