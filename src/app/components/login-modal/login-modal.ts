@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import { User } from '../../../interfaces/user';
+import { LoginService } from '../../../services/login-service';
+import { GetUserByNameResponse } from '../../../interfaces/get-user-by-name-response';
 
 
 @Component({
@@ -23,7 +25,8 @@ export class LoginModal {
   loginForm: FormGroup;
   registerForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<LoginModal>, private _usuarioService: UsuarioService, private _router: Router, private crd: ChangeDetectorRef) {
+
+  constructor(private fb: FormBuilder, private dialogRef: MatDialogRef<LoginModal>, private _usuarioService: UsuarioService, private _router: Router, private crd: ChangeDetectorRef, private _loginService: LoginService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required]
     });
@@ -42,6 +45,7 @@ export class LoginModal {
     this.isRegisterMode = true;
     this.dialogRef.updateSize('50rem', '40rem');
     this.crd.detectChanges();
+
   }
 
   switchToLogin(): void {
@@ -56,14 +60,16 @@ export class LoginModal {
     const username = this.loginForm.value.username;
 
     this._usuarioService.GetByName(username).subscribe({
-      next: (exists: boolean) => {
-        if (exists) {
+      next: (usuario: GetUserByNameResponse) => {
+        if (usuario) {
           this._router.navigate(['/project']);
           this.dialogRef.close({ mode: 'login', username });
+          this._loginService.login(usuario);
         }
       },
-      error: () => {
-        
+      error: (err) => {
+        if(err.status === 404)
+        alert('Usuario no encontrado');
       }
     });
   }

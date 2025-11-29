@@ -1,0 +1,47 @@
+<div class="dialog">
+    <h1 mat-dialog-title>
+        {{ project ? 'Modificar proyecto' : 'Crear proyecto' }}
+    </h1>
+
+    <div mat-dialog-content>
+
+    <form [formGroup]="form" (ngSubmit)="crear()" class="form-container">
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>Titulo</mat-label>
+            <input matInput formControlName="titulo"/>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+            <textarea matInput formControlName="descripcion" cdkTextareaAutosize cdkAutosizeMinRows="2" cdkAutosizeMaxRows="3"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill">
+        <mat-label>Descripción detallada</mat-label>
+            <textarea matInput formControlName="descripcionDetallada" cdkTextareaAutosize cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5"></textarea>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="filtro">
+            <mat-label>Categoría</mat-label>
+            <mat-select formControlName="idCategoria">
+                @for (categoria of categorias; track categoria) {
+                    <mat-option [value]="categoria.id">{{categoria.nombre}}</mat-option>
+                }
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="full-width">
+            <mat-label>URL Imagen</mat-label>
+            <input matInput formControlName="imagen"/>
+        </mat-form-field>
+
+        <div class="actions-row">
+            <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">
+                Aceptar
+            </button>
+            <button mat-raised-button color="primary" type="button" (click)="close()">
+                Cancelar
+            </button>
+        </div>
+    </form>
+</div>
